@@ -86,11 +86,13 @@ input[type=number]:hover {
 	  }
 	}
 	  
-	function limitCharacterCount(numOfCharacters){
- 	  	var value = document.getElementById("field").value;
-      		if (value.length > 6) {
-        	  document.getElementById("field").value = value.slice(0,6); 
-      		}
+	function limitCharacterCount(numOfCharacters){	
+          var value = document.getElementById("field").value;
+          if (value.length > 6) {
+            value = value.slice(0,6); 
+          }
+         value = value.replace(/\D/g,"");
+         document.getElementById("field").value = value;
 	}
       	function verifyEmail(){
 	    	var email = document.getElementById("field").value;
