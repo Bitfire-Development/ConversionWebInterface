@@ -55,7 +55,7 @@ input[type=email]:hover {
       	function verifyEmail(){
 	    	var email = document.getElementById("emailField").value;
 	    	if(!validateEmail(email)){
-			document.getElementById("errorline").value = "\"" + email + "\" is not a valid email address."	
+			document.getElementById("errorline").innerHTML = "\"" + email + "\" is not a valid email address."	
 		}
 	}
 	  
@@ -74,7 +74,7 @@ input[type=email]:hover {
     <main id="content" class="main-content" role="main">
       {{ content }}
       <p id="errorline" style="color:red"/>
-      <form onsubmit="verifyEmail();">
+      <form action="javascript:verifyEmail()">
         <input type="email" id="emailField"/>
         <input type="submit" value="Next"/>
       </form>
