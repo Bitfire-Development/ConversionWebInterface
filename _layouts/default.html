@@ -52,6 +52,12 @@ input[type=email]:hover {
   </head>
 	
   <script>
+	  
+	function load(){
+	  var email = getParameterByName("email");
+	  var hdc = getParameterByName("hdc");
+	  if(email != null && hdc != null)alert("Email: " + email + "\nHashed verification code: " + hdc);
+	}
       	function verifyEmail(){
 	    	var email = document.getElementById("emailField").value;
 	    	if(!validateEmail(email)){
@@ -106,7 +112,7 @@ input[type=email]:hover {
   </script>
 	
 	
-  <body>
+  <body onload="load()">
     <header class="page-header" role="banner">
       <h1 class="project-name">Convert your Calendar Snooze license</h1>
     </header>
