@@ -82,14 +82,14 @@ input[type=number]:hover {
 	      document.getElementById("text").innerHTML = "We sent an email containing a verification code to " + email + " to verify that this is your email address. Please enter that code in the field below.";
 	      var element = document.getElementById("field");
 	      element.type = "number";
-	      element.setAttribute("oninput", "limitCharacterCount(\"field\", 6)";
+	      element.setAttribute("oninput", "limitCharacterCount(6)";
 	  }
 	}
 	  
-	function limitCharacterCount(element, numOfCharacters){
- 	  	var value = document.getElementById(element).value;
+	function limitCharacterCount(numOfCharacters){
+ 	  	var value = document.getElementById("field").value;
       		if (value.length > 6) {
-        	  document.getElementById(element).value = value.slice(0,6); 
+        	  document.getElementById("field").value = value.slice(0,6); 
       		}
 	}
       	function verifyEmail(){
