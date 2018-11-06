@@ -50,6 +50,22 @@ input[type=email]:hover {
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
   </head>
+	
+  <script>
+      	function verifyEmail(){
+	    	var email = document.getElementById("emailField").value;
+	    	if(!validateEmail(email)){
+			document.getElementById("errorline").value = "\"" + email + "\" is not a valid email address."	
+		}
+	}
+	  
+	function validateEmail(email) {
+    		var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    		return re.test(String(email).toLowerCase());
+	}
+  </script>
+	
+	
   <body>
     <header class="page-header" role="banner">
       <h1 class="project-name">Convert your Calendar Snooze license</h1>
@@ -57,8 +73,9 @@ input[type=email]:hover {
 
     <main id="content" class="main-content" role="main">
       {{ content }}
-      <form>
-        <input type="email" name="email"/>
+      <p id="errorline" style="color:red"/>
+      <form onsubmit="verifyEmail();">
+        <input type="email" id="emailField"/>
         <input type="submit" value="Next"/>
       </form>
 
