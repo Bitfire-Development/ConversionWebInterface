@@ -55,8 +55,15 @@ input[type=email]:hover {
       	function verifyEmail(){
 	    	var email = document.getElementById("emailField").value;
 	    	if(!validateEmail(email)){
-			document.getElementById("errorline").innerHTML = "\"" + email + "\" is not a valid email address."	
+			document.getElementById("errorline").innerHTML = "\"" + email + "\" is not a valid email address.";	
+		}else{
+			document.getElementById("errorline").innerHTML = "";
+			sendCodeEmail(email);
 		}
+	}
+	  
+	function sendCodeEmail(email){
+		alert("sending code mail to: " + email);	
 	}
 	  
 	function validateEmail(email) {
