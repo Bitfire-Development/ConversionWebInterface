@@ -82,7 +82,7 @@ input[type=number]:hover {
 	      document.getElementById("text").innerHTML = "We sent an email containing a verification code to " + email + " to verify that this is your email address. Please enter that code in the field below.";
 	      var element = document.getElementById("field");
 	      element.type = "number";
-	      element.oninput = "limitCharacterCount(\"field\", 6)";
+	      element.setAttribute("oninput", "limitCharacterCount(\"field\", 6)";
 	  }
 	}
 	  
