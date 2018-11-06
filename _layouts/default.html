@@ -55,16 +55,26 @@ input[type=email]:hover {
       	function verifyEmail(){
 	    	var email = document.getElementById("emailField").value;
 	    	if(!validateEmail(email)){
-			document.getElementById("errorline").innerHTML = "\"" + email + "\" is not a valid email address.";	
-		}else{
-			document.getElementById("errorline").innerHTML = "";
-			sendCodeEmail(email);
+			document.getElementById("errorline").innerHTML = "\"" + email + "\" is not a valid email address.";
+			return;
+		}
+		document.getElementById("errorline").innerHTML = "";
+		var code = generateCode();
+		sendCodeEmail(code, email);
 		}
 	}
 	  
-	function sendCodeEmail(email){
-		alert("sending code mail to: " + email);	
+	function sendCodeEmail(code, email){
+		alert("sending validation code " + code + " to " + email);	
 	}
+	  
+	function generateCode() {
+    	  var code = "" + Math.floor((Math.random() * 9)+1);
+	    for(i = 0;i<5;i++){
+    	      code += Math.floor(Math.random() * 10);
+            }
+            return code;
+   	}  
 	  
 	function validateEmail(email) {
     		var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
