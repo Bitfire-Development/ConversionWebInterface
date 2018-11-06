@@ -2,8 +2,20 @@
 <html lang="{{ site.lang | default: "en-US" }}">
   <head>
     <meta charset="UTF-8">
-    <style> 
+<style> 
 input[type=email] {
+    padding: 6px 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 3px solid #CCC;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+    border-radius: 25px
+    
+}
+
+input[type=number] {
     padding: 6px 10px;
     margin: 8px 0;
     box-sizing: border-box;
@@ -39,7 +51,16 @@ input:-webkit-autofill {
 input[type=email]:focus {
     border: 3px solid #555;
 }
+
 input[type=email]:hover {
+    border: 3px solid #555;
+}
+
+input[type=number]:focus {
+    border: 3px solid #555;
+}
+
+input[type=number]:hover {
     border: 3px solid #555;
 }
 </style>
@@ -56,10 +77,23 @@ input[type=email]:hover {
 	function load(){
 	  var email = getParameterByName("mail");
 	  var hdc = getParameterByName("hdc");
-	  if(email != null && hdc != null)alert("Email: " + email + "\nHashed verification code: " + hdc);
+	  if(email != null && hdc != null){
+	      document.getElementById("title").innerHTML = "Enter your verification code";
+	      document.getElementById("text").innerHTML = "We sent an email containing a verification code to " + email + " to verify that this is your email address. Please enter that code in the field below.";
+	      var element = document.getElementById("field");
+	      element.type = "number";
+	      element.oninput = "limitCharacterCount(\"field\", 6)";
+	  }
+	}
+	  
+	function limitCharacterCount(element, numOfCharacters){
+ 	  	var value = document.getElementById(element).value;
+      		if (value.length > 6) {
+        	  document.getElementById(element).value = value.slice(0,6); 
+      		}
 	}
       	function verifyEmail(){
-	    	var email = document.getElementById("emailField").value;
+	    	var email = document.getElementById("field").value;
 	    	if(!validateEmail(email)){
 			document.getElementById("errorline").innerHTML = "\"" + email + "\" is not a valid email address.";
 			return;
@@ -119,15 +153,15 @@ input[type=email]:hover {
 	
   <body onload="load()">
     <header class="page-header" role="banner">
-      <h1 class="project-name">Convert your Calendar Snooze license</h1>
+      <h1 id="header" class="project-name">Convert your Calendar Snooze license</h1>
     </header>
 
     <main id="content" class="main-content" role="main">
-      <h2>Enter your email address</h2>
-      <p>Please enter the email address you used to purchase the key app in the field below.</p>
+      <h2 id="title">Enter your email address</h2>
+      <p id="text">Please enter the email address you used to purchase the key app in the field below.</p>
       <p id="errorline" style="color:red"/>
-      <form action="javascript:verifyEmail()">
-        <input type="email" id="emailField"/>
+      <form id="form" action="javascript:verifyEmail()">
+        <input type="email" id="field"/>
         <input type="submit" value="Next"/>
       </form>
 
