@@ -80,22 +80,44 @@ input[type=number]:hover {
 	  if(email != null && hdc != null){
 	      document.getElementById("title").innerHTML = "Enter your verification code";
 	      document.getElementById("text").innerHTML = "We sent an email containing a verification code to " + email + " to verify that this is your email address. Please enter that code in the field below.";
-	      var element = document.getElementById("field");
+	      var element = document.getElementById("emailField");
 	      element.type = "number";
+	      element.setAttribute("id", "codeField");
 	      element.setAttribute("oninput", "limitCharacterCount(6)");
+	      document.getElementById("form").setAttribute("action", "javascript:verifyCode()");
 	  }
 	}
 	  
+	function verifyCode(){
+	  var hdc = getParameterByName("hdc");
+	  var email = getParameterByName("mail");
+	  var code = document.getElementById("codeField").value;
+	  if(code == null || code == ""){
+	    document.getElementById("errorline").innerHTML = "Please enter the verification code you received.";
+	    return;
+	  }
+	  if(sha1(code) == hdc){
+	    document.getElementById("errorline").innerHTML = "";
+	    sendRequest(email)  
+	  }else{
+	    document.getElementById("errorline").innerHTML = "codes don't match.";  
+	  }
+	}
+	  
+	function sendRequest(email){
+	  alert("send request for " + email + ".";	
+	}
+	  
 	function limitCharacterCount(numOfCharacters){	
-          var value = document.getElementById("field").value;
+          var value = document.getElementById("emailField").value;
           if (value.length > 6) {
             value = value.slice(0,6); 
           }
          value = value.replace(/\D/g,"");
-         document.getElementById("field").value = value;
+         document.getElementById("emailField").value = value;
 	}
       	function verifyEmail(){
-	    	var email = document.getElementById("field").value;
+	    	var email = document.getElementById("emailField").value;
 		if(email == ""){
 			document.getElementById("errorline").innerHTML = "Please enter an email address";
 			return;
@@ -167,7 +189,7 @@ input[type=number]:hover {
       <p id="text">Please enter the email address you used to purchase the key app in the field below.</p>
       <p id="errorline" style="color:red"/>
       <form id="form" action="javascript:verifyEmail()">
-        <input type="email" id="field"/>
+        <input type="email" id="emailField"/>
         <input type="submit" value="Next"/>
       </form>
 
