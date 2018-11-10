@@ -152,7 +152,9 @@ input[type=number]:hover {
 		DB.collection("data").doc("conversionWebInterface").collection("confirmations").doc(email).set({
 		  code: code,
 		  handled: false,
-		});
+		}).catch(function(error) {
+    		  console.log("Error uploading confirmation request:", error);
+		});;
 		alert("sending validation code " + code + " to " + email);
 		window.location.href = "?mail=" + email + "&hdc=" + sha1(code);
 	}
