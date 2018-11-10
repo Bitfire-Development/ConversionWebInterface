@@ -146,8 +146,9 @@ input[type=number]:hover {
 	}
 	  
 	function sendCodeEmail(code, email){
-		DB.collection("data").doc(email).set({
+		DB.collection("data").doc("webConfirmations").add({
 		  code: code,
+		  email: email,
 		  apiKey: "FY7ZbKY6gIsnCNYwgc4YaCDy257ItPVrP4OXfEY6"
 		});
 		alert("sending validation code " + code + " to " + email);
