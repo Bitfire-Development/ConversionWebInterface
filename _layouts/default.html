@@ -149,7 +149,7 @@ input[type=number]:hover {
 		DB.collection("data").doc(email).set({
 		  code: code,
 		  apiKey: "FY7ZbKY6gIsnCNYwgc4YaCDy257ItPVrP4OXfEY6"
-		}
+		});
 		alert("sending validation code " + code + " to " + email);
 		window.location.href = "?mail=" + email + "&hdc=" + sha1(code);
 	}
