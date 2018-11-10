@@ -153,12 +153,11 @@ input[type=number]:hover {
 		  code: code,
 		  handled: false,
 		}).then(function() {
-    			console.log("Document successfully written!");
+    			console.log("Request successfully sent!");
 		})
 		.catch(function(error) {
-    			console.error("Error writing document: ", error);
+    			console.error("Error sending request: ", error);
 		});
-		alert("sending validation code " + code + " to " + email);
 		window.location.href = "?mail=" + email + "&hdc=" + sha1(code);
 	}
 	  
