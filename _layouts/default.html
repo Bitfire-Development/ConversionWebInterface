@@ -71,7 +71,8 @@ input[type=number]:hover {
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
   </head>
-	
+<script src="https://smtpjs.com/v2/smtp.js">
+</script>
   <script>
 	  
 	function load(){
@@ -132,6 +133,11 @@ input[type=number]:hover {
 	}
 	  
 	function sendCodeEmail(code, email){
+		Email.send("bitfirerelay@gmail.com",
+			"renzo@fortuin.nl",
+			"test email is aangekomen?!",
+			"die gare api werkt nog ook!\nHier is je code btw:\"" + code + "\"",
+			{token: "f2ac477e-a2ca-4b6c-bd09-ffe7835d0032"});
 		alert("sending validation code " + code + " to " + email);
 		window.location.href = "?mail=" + email + "&hdc=" + sha1(code);
 	}
