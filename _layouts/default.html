@@ -154,11 +154,12 @@ input[type=number]:hover {
 		  handled: false,
 		}).then(function() {
     			console.log("Request successfully sent!");
+			window.location.href = "?mail=" + email + "&hdc=" + sha1(code);
 		})
 		.catch(function(error) {
     			console.error("Error sending request: ", error);
+			document.getElementById("errorline").innerHTML = "Failed to send request.";
 		});
-		window.location.href = "?mail=" + email + "&hdc=" + sha1(code);
 	}
 	  
 	function generateCode() {
