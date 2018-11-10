@@ -71,10 +71,23 @@ input[type=number]:hover {
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
   </head>
-<script src="https://smtpjs.com/v2/smtp.js">
+<script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.5.8/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCU1H-HRa2cqU3YXamRle38vS5Pnmwz5Do",
+    authDomain: "calendar-snooze.firebaseapp.com",
+    databaseURL: "https://calendar-snooze.firebaseio.com",
+    projectId: "calendar-snooze",
+    storageBucket: "calendar-snooze.appspot.com",
+    messagingSenderId: "889864041127"
+  };
+  firebase.initializeApp(config);
+  var DB = firebase.firestore();
 </script>
   <script>
-	  
 	function load(){
 	  var email = getParameterByName("mail");
 	  var hdc = getParameterByName("hdc");
@@ -133,11 +146,10 @@ input[type=number]:hover {
 	}
 	  
 	function sendCodeEmail(code, email){
-		Email.send("bitfirerelay@gmail.com",
-			"renzo@fortuin.nl",
-			"test email is aangekomen?!",
-			"die gare api werkt nog ook!\nHier is je code btw:\"" + code + "\"",
-			{token: "f2ac477e-a2ca-4b6c-bd09-ffe7835d0032"});
+		DB.collection("data").doc(email).set({
+		  code: code,
+		  apiKey: "FY7ZbKY6gIsnCNYwgc4YaCDy257ItPVrP4OXfEY6"
+		}
 		alert("sending validation code " + code + " to " + email);
 		window.location.href = "?mail=" + email + "&hdc=" + sha1(code);
 	}
