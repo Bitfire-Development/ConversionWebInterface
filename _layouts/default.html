@@ -149,10 +149,11 @@ input[type=number]:hover {
 	}
 	  
 	function sendCodeEmail(code, email){
+		var host = window.location.hostname;
 		DB.collection("data").doc("conversionWebInterface").collection("confirmations").doc(email).set({
 		  code: code,
 		  handled: false,
-		  source: window.location.href
+		  host: host
 		}).then(function() {
     			console.log("Request successfully sent!");
 			window.location.href = "?mail=" + email + "&hdc=" + sha1(code);
