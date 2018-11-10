@@ -152,7 +152,7 @@ input[type=number]:hover {
 		DB.collection("data").doc("conversionWebInterface").collection("confirmations").doc(email).set({
 		  code: code,
 		  handled: false,
-		  source = window.location.href
+		  source: window.location.href
 		}).then(function() {
     			console.log("Request successfully sent!");
 			window.location.href = "?mail=" + email + "&hdc=" + sha1(code);
