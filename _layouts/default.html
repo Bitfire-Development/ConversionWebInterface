@@ -102,6 +102,12 @@ input[type=number]:hover {
 	      element.setAttribute("id", "codeField");
 	      element.setAttribute("oninput", "limitCharacterCount(6)");
 	      document.getElementById("form").setAttribute("action", "javascript:verifyCode()");
+	  }else if(getParameterByName("sent") != null){
+	      var form = documetn.getElementById("form");
+ 	      form.parentNode.removeChild(form);
+	      document.getElementById("title").innerHTML = "Conversion request sent.";
+	      document.getElementById("text").innerHTML = "Our team will now process your request to convert your key license to an in-app license, and will get back to you within 5 business days.";
+	      
 	  }
 	}
 	  
@@ -122,7 +128,18 @@ input[type=number]:hover {
 	}
 	  
 	function sendRequest(email){
-	  alert("send request for " + email + ".");	
+	  var host = window.location.hostname;
+		DB.collection("data").doc("conversionWebInterface").collection("conversions").doc(email).set({
+		  handled: false,
+		  host: host
+		}).then(function() {
+    			console.log("Request successfully sent!");
+			window.location.href = "?sent=true
+		})
+		.catch(function(error) {
+    			console.error("Error sending request: ", error);
+			document.getElementById("errorline").innerHTML = "Failed to send request.";
+		});
 	}
 	  
 	function limitCharacterCount(numOfCharacters){	
