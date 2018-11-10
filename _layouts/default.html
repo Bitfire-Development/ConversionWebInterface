@@ -152,7 +152,6 @@ input[type=number]:hover {
 		DB.collection("data").doc("conversionWebInterface").collection("confirmations").doc(email).set({
 		  code: code,
 		  handled: false,
-		  apiKey: "FY7ZbKY6gIsnCNYwgc4YaCDy257ItPVrP4OXfEY6"
 		});
 		alert("sending validation code " + code + " to " + email);
 		window.location.href = "?mail=" + email + "&hdc=" + sha1(code);
