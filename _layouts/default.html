@@ -131,7 +131,8 @@ input[type=number]:hover {
 	  var host = window.location.hostname;
 		DB.collection("data").doc("conversionWebInterface").collection("conversions").doc(email).set({
 		  handled: false,
-		  host: host
+		  host: host,
+		  locale: "en_US"
 		}).then(function() {
     			console.log("Request successfully sent!");
 			window.location.href = "?sent=true"
@@ -170,7 +171,8 @@ input[type=number]:hover {
 		DB.collection("data").doc("conversionWebInterface").collection("confirmations").doc(email).set({
 		  code: code,
 		  handled: false,
-		  host: host
+		  host: host,
+		  locale: "en_US"
 		}).then(function() {
     			console.log("Request successfully sent!");
 			window.location.href = "?mail=" + email + "&hdc=" + sha1(code);
